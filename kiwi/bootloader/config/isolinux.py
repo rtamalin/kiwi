@@ -258,17 +258,28 @@ class BootLoaderConfigIsoLinux(BootLoaderConfigBase):
             'chain.c32',
             'mboot.c32'
         ]
+        grub_image_file_names = [
+            'eltorito.img'
+        ]
         syslinux_dirs = [
             '/usr/share/syslinux/',
             '/usr/lib/syslinux/modules/bios/'
         ]
-        for syslinux_file_name in syslinux_file_names:
-            for syslinux_dir in syslinux_dirs:
-                syslinux_file = ''.join(
-                    [lookup_path, syslinux_dir, syslinux_file_name]
+        bios_grub_dirs = [
+            '/usr/lib/grub2/i386-pc/'
+        ]
+        for boot_file_name in syslinux_file_names + grub_image_file_names:
+            for boot_dir in syslinux_dirs + bios_grub_dirs:
+                boot_file = ''.join(
+                    [lookup_path, boot_dir, boot_file_name]
                 )
-                if os.path.exists(syslinux_file):
-                    shutil.copy(syslinux_file, loader_data)
+                if os.path.exists(boot_file):
+                    log.info(
+                        'Copying {0} to isolinux loader directory'.format(
+                            boot_file
+                        )
+                    )
+                    shutil.copy(boot_file, loader_data)
 
         bash_command = ' '.join(
             ['cp', lookup_path + '/boot/memtest*', loader_data + '/memtest']

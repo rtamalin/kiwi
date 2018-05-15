@@ -85,7 +85,9 @@ class IsoToolsXorrIso(IsoToolsBase):
         self.iso_parameters += [
             '-joliet', 'on', '-padding', '0'
         ]
-        loader_file = self.boot_path + '/loader/isolinux.bin'
+        #loader_file = self.boot_path + '/loader/isolinux.bin'
+        # FIXME
+        loader_file = self.boot_path + '/loader/eltorito.img'
 
         syslinux_lookup_paths = [
             '/usr/share/syslinux', '/usr/lib/syslinux/modules/bios'

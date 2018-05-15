@@ -741,6 +741,17 @@ class Defaults(object):
             return default_module_directory_names[arch]
 
     @classmethod
+    def get_bios_module_directory_name(self):
+        """
+        Provides x86 BIOS directory name which stores the pc binaries
+
+        :return: directory name
+
+        :rtype: str
+        """
+        return 'i386-pc'
+
+    @classmethod
     def get_efi_image_name(self, arch):
         """
         Provides architecture specific EFI boot binary name
@@ -762,6 +773,17 @@ class Defaults(object):
         }
         if arch in default_efi_image_names:
             return default_efi_image_names[arch]
+
+    @classmethod
+    def get_bios_image_name(self):
+        """
+        Provides bios core boot binary name
+
+        :return: name
+
+        :rtype: str
+        """
+        return 'core.img'
 
     @classmethod
     def get_default_boot_timeout_seconds(self):
